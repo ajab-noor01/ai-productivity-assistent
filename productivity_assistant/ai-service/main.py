@@ -62,18 +62,6 @@ def detect_language(message: str):
     text = message.lower().strip()
 
     # --------------------------------------------------------
-    # Urdu Script
-    # --------------------------------------------------------
-
-    if any(
-        "\u0600" <= character <= "\u06FF"
-        for character in text
-    ):
-
-        return "urdu"
-
-
-    # --------------------------------------------------------
     # Roman Urdu
     # --------------------------------------------------------
 
@@ -261,68 +249,6 @@ MESSAGES = {
         "error":
             "Maaf kijiye, request process karte waqt problem aa gayi."
 
-    },
-
-
-    "urdu": {
-
-        "empty":
-            "براہ کرم اپنا سوال درج کریں۔",
-
-        "no_tasks":
-            "آپ کی درخواست کے مطابق کوئی ٹاسک نہیں ملا۔",
-
-        "tasks":
-            "آپ کی درخواست کے مطابق ٹاسکس یہ ہیں:",
-
-        "focus":
-            "آپ کے موجودہ ٹاسکس کو دیکھتے ہوئے، آج آپ کو ان ٹاسکس پر توجہ دینی چاہیے:",
-
-        "no_focus":
-            "آج آپ کے پاس کوئی زیر التوا ٹاسک نہیں ہے جس پر توجہ دینے کی ضرورت ہو۔",
-
-        "no_notes":
-            "آپ کے پاس ابھی کوئی نوٹ موجود نہیں ہے۔",
-
-        "notes":
-            "آپ کے تازہ ترین نوٹس یہ ہیں:",
-
-        "no_reminders":
-            "آپ کے پاس ابھی کوئی ریمائنڈر نہیں ہے۔",
-
-        "reminders":
-            "آپ کے تازہ ترین ریمائنڈرز یہ ہیں:",
-
-        "task_created":
-            "ٹاسک کامیابی سے بنا دیا گیا ہے۔",
-
-        "task_title_missing":
-            "براہ کرم ٹاسک کا عنوان درج کریں۔",
-
-        "task_create_error":
-            "معذرت، ٹاسک بنایا نہیں جا سکا۔",
-
-        "greeting":
-            "السلام علیکم! 👋 میں آپ کا AI Productivity Assistant ہوں۔ "
-            "میں آپ کے ٹاسکس، نوٹس اور ریمائنڈرز کو منظم کرنے میں مدد کر سکتا ہوں۔",
-
-        "help":
-            "میں آپ کے ٹاسکس، نوٹس، ریمائنڈرز اور روزانہ کی ترجیحات "
-            "میں مدد کر سکتا ہوں۔ آپ مثال کے طور پر پوچھ سکتے ہیں:\n\n"
-            "• میرے زیر التوا ٹاسکس دکھائیں\n"
-            "• میرے مکمل شدہ ٹاسکس دکھائیں\n"
-            "• میرے اہم ٹاسکس دکھائیں\n"
-            "• میرے تاخیر شدہ ٹاسکس دکھائیں\n"
-            "• آج مجھے کن ٹاسکس پر توجہ دینی چاہیے؟\n"
-            "• آج کے ٹاسکس دکھائیں\n"
-            "• کل کے ٹاسکس دکھائیں\n"
-            "• میرے ریمائنڈرز دکھائیں\n"
-            "• میرے نوٹس دکھائیں\n"
-            "• ٹاسک بنائیں Complete PHP project",
-
-        "error":
-            "معذرت، اس وقت آپ کی درخواست پر کارروائی نہیں ہو سکی۔"
-
     }
 }
 
@@ -349,23 +275,12 @@ def format_tasks(tasks, language):
         due_date = task[3]
 
 
-        if language == "urdu":
-
-            reply += (
-                f"• {title}\n"
-                f"  ترجیح: {priority}\n"
-                f"  حالت: {status}\n"
-                f"  آخری تاریخ: {due_date}\n\n"
-            )
-
-        else:
-
-            reply += (
-                f"• {title}\n"
-                f"  Priority: {priority}\n"
-                f"  Status: {status}\n"
-                f"  Due: {due_date}\n\n"
-            )
+        reply += (
+            f"• {title}\n"
+            f"  Priority: {priority}\n"
+            f"  Status: {status}\n"
+            f"  Due: {due_date}\n\n"
+        )
 
 
     return reply
@@ -393,23 +308,12 @@ def format_focus_tasks(tasks, language):
         due_date = task[3]
 
 
-        if language == "urdu":
-
-            reply += (
-                f"• {title}\n"
-                f"  ترجیح: {priority}\n"
-                f"  حالت: {status}\n"
-                f"  آخری تاریخ: {due_date}\n\n"
-            )
-
-        else:
-
-            reply += (
-                f"• {title}\n"
-                f"  Priority: {priority}\n"
-                f"  Status: {status}\n"
-                f"  Due: {due_date}\n\n"
-            )
+        reply += (
+            f"• {title}\n"
+            f"  Priority: {priority}\n"
+            f"  Status: {status}\n"
+            f"  Due: {due_date}\n\n"
+        )
 
 
     return reply
@@ -437,23 +341,12 @@ def format_notes(notes, language):
         created_at = note[3]
 
 
-        if language == "urdu":
-
-            reply += (
-                f"• {title}\n"
-                f"  زمرہ: {category}\n"
-                f"  مواد: {content}\n"
-                f"  تاریخ و وقت: {created_at}\n\n"
-            )
-
-        else:
-
-            reply += (
-                f"• {title}\n"
-                f"  Category: {category}\n"
-                f"  Content: {content}\n"
-                f"  Created: {created_at}\n\n"
-            )
+        reply += (
+            f"• {title}\n"
+            f"  Category: {category}\n"
+            f"  Content: {content}\n"
+            f"  Created: {created_at}\n\n"
+        )
 
 
     return reply
@@ -481,23 +374,12 @@ def format_reminders(reminders, language):
         status = reminder[3]
 
 
-        if language == "urdu":
-
-            reply += (
-                f"• {description}\n"
-                f"  تاریخ: {reminder_date}\n"
-                f"  وقت: {reminder_time}\n"
-                f"  حالت: {status}\n\n"
-            )
-
-        else:
-
-            reply += (
-                f"• {description}\n"
-                f"  Date: {reminder_date}\n"
-                f"  Time: {reminder_time}\n"
-                f"  Status: {status}\n\n"
-            )
+        reply += (
+            f"• {description}\n"
+            f"  Date: {reminder_date}\n"
+            f"  Time: {reminder_time}\n"
+            f"  Status: {status}\n\n"
+        )
 
 
     return reply
@@ -539,12 +421,7 @@ def is_create_task_request(message):
         "task banao",
         "task add karo",
         "kaam add karo",
-        "kaam banao",
-
-        # Urdu
-        "ٹاسک بنائیں",
-        "ٹاسک بناؤ",
-        "ٹاسک شامل کریں"
+        "kaam banao"
     ]
 
 
@@ -672,18 +549,7 @@ def is_task_request(message):
         "poore",
         "pura",
         "aaj",
-        "kal",
-
-        # Urdu
-        "ٹاسک",
-        "کام",
-        "توجہ",
-        "اہم",
-        "زیر التوا",
-        "نامکمل",
-        "مکمل",
-        "آج",
-        "کل"
+        "kal"
     ]
 
 
@@ -705,10 +571,7 @@ def is_note_request(message):
         "notes",
         "notebook",
         "my note",
-        "my notes",
-
-        "نوٹ",
-        "نوٹس"
+        "my notes"
     ]
 
 
@@ -734,11 +597,7 @@ def is_reminder_request(message):
         "yaad",
         "yad",
         "yaad dilao",
-        "yaad dila",
-
-        "یاد",
-        "ریماینڈر",
-        "ریمائنڈر"
+        "yaad dila"
     ]
 
 
@@ -778,13 +637,7 @@ def get_task_filter(message):
         "kin tasks par focus",
         "focus karna",
         "focus karun",
-        "aaj focus",
-
-        "آج کس",
-        "آج کن",
-        "توجہ دینی",
-        "توجہ دوں",
-        "آج کی ترجیح"
+        "aaj focus"
     ]
 
 
@@ -809,10 +662,7 @@ def get_task_filter(message):
         "underway",
 
         "pending tasks",
-        "pending task",
-
-        "زیر التوا",
-        "نامکمل"
+        "pending task"
     ]
 
 
@@ -838,10 +688,7 @@ def get_task_filter(message):
 
         "mukammal",
         "poore",
-        "pura",
-
-        "مکمل",
-        "مکمل شدہ"
+        "pura"
     ]
 
 
@@ -866,10 +713,7 @@ def get_task_filter(message):
         "top priority",
 
         "high priority tasks",
-        "important work",
-
-        "اہم ٹاسک",
-        "اہم کام"
+        "important work"
     ]
 
 
@@ -894,10 +738,7 @@ def get_task_filter(message):
         "past deadline",
 
         "taakhir",
-        "taakhir shuda",
-
-        "تاخیر",
-        "تاخیر شدہ"
+        "taakhir shuda"
     ]
 
 
@@ -922,9 +763,7 @@ def get_task_filter(message):
         "tasks for today",
 
         "aaj",
-        "aaj ke tasks",
-
-        "آج"
+        "aaj ke tasks"
     ]
 
 
@@ -949,9 +788,7 @@ def get_task_filter(message):
         "tasks for tomorrow",
 
         "kal",
-        "kal ke tasks",
-
-        "کل"
+        "kal ke tasks"
     ]
 
 
@@ -1020,9 +857,7 @@ def chat(request: ChatRequest):
             "hey",
             "salam",
             "assalam",
-            "assalam o alaikum",
-            "السلام علیکم",
-            "ہیلو"
+            "assalam o alaikum"
         ]
 
 
@@ -1035,8 +870,6 @@ def chat(request: ChatRequest):
             or "hey ai" in message
             or "salam ai" in message
             or "assalam o alaikum" in message
-            or "السلام علیکم" in message
-            or "ہیلو" in message
         )
 
 
@@ -1061,10 +894,7 @@ def chat(request: ChatRequest):
 
             "madad",
             "help karo",
-            "kya kar sakte ho",
-
-            "مدد",
-            "آپ کیا کر سکتے ہیں"
+            "kya kar sakte ho"
         ]
 
 
@@ -1210,23 +1040,12 @@ def chat(request: ChatRequest):
                 # Success response
                 # ------------------------------------------------
 
-                if language == "urdu":
-
-                    reply = (
-                        f"{MESSAGES[language]['task_created']}\n\n"
-                        f"عنوان: {task_title}\n"
-                        f"ترجیح: {priority}\n"
-                        f"حالت: {status}"
-                    )
-
-                else:
-
-                    reply = (
-                        f"{MESSAGES[language]['task_created']}\n\n"
-                        f"Title: {task_title}\n"
-                        f"Priority: {priority}\n"
-                        f"Status: {status}"
-                    )
+                reply = (
+                    f"{MESSAGES[language]['task_created']}\n\n"
+                    f"Title: {task_title}\n"
+                    f"Priority: {priority}\n"
+                    f"Status: {status}"
+                )
 
 
                 return {
